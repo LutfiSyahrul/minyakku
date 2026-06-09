@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parfumku Store - Hybrid System Demo</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>PARFUMKU</h1>
+        <p class="author">by Edwin Helmi Setiawan & Lutfi Syahrul Ramdani</p>
+        <p class="sub">Simulasi Sistem Terdistribusi Hibrida (REST API & SOAP Interoperability)</p>
+    </header>
+
+    <div class="grid" id="katalog-parfum">
+        <p style="text-align: center; width: 100%; color: #d4af37;">Membangunkan Server & Memuat Koleksi...</p>
+    </div>
+
+    <div id="log-container">
+        <h3>🧾 Respon Transaksi (JSON dari Server A):</h3>
+        <pre id="log-content"></pre>
+    </div>
+
+    <div id="history-container" style="margin-top: 50px;">
+        <h3 style="color: #d4af37; font-family: 'Cinzel', serif;">📜 Riwayat Transaksi Terakhir</h3>
+        <table style="width: 100%; border-collapse: collapse; background: rgba(25, 10, 35, 0.75); color: #fff; border-radius: 8px; overflow: hidden;">
+            <thead style="background: rgba(212, 175, 55, 0.2);">
+                <tr>
+                    <th style="padding: 15px; text-align: left;">Invoice</th>
+                    <th style="padding: 15px;">Produk</th>
+                    <th style="padding: 15px;">Status</th>
+                </tr>
+            </thead>
+            <tbody id="history-body">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="index.js"></script>
+
+</body>
+</html>

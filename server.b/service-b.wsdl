@@ -1,0 +1,44 @@
+<definitions name="PaymentService"
+   targetNamespace="http://localhost:8002/wsdl"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:tns="http://localhost:8002/wsdl"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <message name="prosesPembayaranRequest">
+      <part name="invoiceNo" type="xsd:string"/>
+      <part name="noRekening" type="xsd:string"/>
+      <part name="nominal" type="xsd:string"/>
+      <part name="produkId" type="xsd:string"/>
+      <part name="jumlahBeli" type="xsd:string"/>
+   </message>
+
+   <message name="prosesPembayaranResponse">
+      <part name="status" type="xsd:string"/>
+      <part name="referensiSoap" type="xsd:string"/>
+      <part name="pesan" type="xsd:string"/>
+   </message>
+
+   <portType name="PaymentGatewayPort">
+      <operation name="prosesPembayaran">
+         <input message="tns:prosesPembayaranRequest"/>
+         <output message="tns:prosesPembayaranResponse"/>
+      </operation>
+   </portType>
+
+   <binding name="PaymentGatewayBinding" type="tns:PaymentGatewayPort">
+      <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="prosesPembayaran">
+         <soap:operation soapAction="prosesPembayaran"/>
+         <input><soap:body use="literal" namespace="tns"/></input>
+         <output><soap:body use="literal" namespace="tns"/></output>
+      </operation>
+   </binding>
+
+   <service name="PaymentGatewayService">
+      <documentation>WSDL Legacy Bank Simulator</documentation>
+      <port name="PaymentGatewayPort" binding="tns:PaymentGatewayBinding">
+         <soap:address location="http://localhost:8002/wsdl"/>
+      </port>
+   </service>
+</definitions>
