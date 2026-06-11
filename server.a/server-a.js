@@ -3,23 +3,27 @@ const mysql = require("mysql2/promise");
 const soap = require("soap");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
+
+// Load .env from project root
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 // 1. DEFINISIKAN 'app' DI SINI (Sebelum digunakan di middleware)
 const app = express();
-const port = 8001;
+const port = process.env.PORT_A || 8001;
 
 // 2. BARU GUNAKAN 'app' DI SINI (Setelah didefinisikan)
 app.use(cors());
 app.use(bodyParser.json());
 
 const dbConfig = {
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "db_minyakku", // <-- Diubah ke database saya
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_DATABASE || "db_minyakku",
 };
 
-const soapServerUrl = "http://localhost:8002/wsdl?wsdl";
+const soapServerUrl = process.env.SOAP_WSDL_URL || "http://localhost:8002/wsdl?wsdl";
 
 // 1. ENDPOINT REST: Ambil Koleksi Parfum (Format: JSON)
 app.get("/api/parfum", async (req, res) => {

@@ -4,15 +4,18 @@ const mysql = require('mysql2/promise');
 const fs = require('fs');
 const path = require('path');
 
+// Load .env from project root
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 const app = express();
-const port = 8002;
+const port = process.env.PORT_B || 8002;
 
 // Konfigurasi Database Terpusat dikunci ke db_parfumku
 const dbConfig = {
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "db_minyakku", // Diubah ke database saya 
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_DATABASE || "db_minyakku", // Diubah ke database saya 
 };
 
 const paymentService = {
