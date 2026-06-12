@@ -1,5 +1,35 @@
 const API_URL = "http://localhost:8001/api";
 
+// --- VARIABEL & FUNGSI LOGIKA CAROUSEL ---
+let currentSlide = 0;
+let totalSlides = 0;
+
+function nextSlide() {
+    if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateCarousel();
+    }
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        currentSlide--;
+        updateCarousel();
+    }
+}
+
+function updateCarousel() {
+    const track = document.getElementById("katalog-parfum");
+    if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Matikan tombol jika mentok
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    if (prevBtn) prevBtn.disabled = currentSlide === 0;
+    if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
+}
+
+
 // --- FUNGSI CUSTOM POP-UP MODAL ---
 function showModal(message, type = "success") {
     // Hapus modal lama jika ada agar tidak menumpuk
@@ -61,6 +91,10 @@ async function loadParfum() {
             const katalogDiv = document.getElementById("katalog-parfum");
             katalogDiv.innerHTML = "";
 
+            // Set data untuk Carousel
+            totalSlides = result.data.length;
+            currentSlide = 0; // Reset ke awal tiap kali data di-load
+
             result.data.forEach((p) => {
                 katalogDiv.innerHTML += `
                     <div class="card">
@@ -82,6 +116,9 @@ async function loadParfum() {
                     </div>
                 `;
             });
+
+            // Aktifkan animasi dan tombol pertama kali
+            updateCarousel();
         }
     } catch (error) {
         showModal(
@@ -91,7 +128,7 @@ async function loadParfum() {
     }
 }
 
-// --- 2. KIRIM REQUEST CHECKOUT KE SERVER A ---
+// 2. KIRIM REQUEST CHECKOUT KE SERVER A ---
 async function prosesCheckout(parfumId) {
     const jumlahBeli = document.getElementById(`qty-${parfumId}`).value;
     const noRekening = document.getElementById(`rek-${parfumId}`).value;
@@ -127,6 +164,7 @@ async function prosesCheckout(parfumId) {
             "Mengirim data JSON ke Server A...\nMenunggu respon dari Server B (SOAP)...";
         logContent.classList.remove("success-text");
 
+        // menampilkan log request yang dikirim ke Server A
         const response = await fetch(`${API_URL}/checkout`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

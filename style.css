@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=400;600&family=Montserrat:wght@300;400;500&display=swap');
 
 body { 
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
     background: linear-gradient(135deg, #1a0826 0%, #2c0e3f 40%, #4a1c6d 70%, #2c0e3f 100%);
     background-attachment: fixed; 
     margin: 0; 
@@ -32,7 +31,6 @@ header h1 {
 header p.author { font-size: 0.9em; color: #e0e0e0; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
 header p.sub { font-size: 0.8em; color: #aa91b8; text-transform: uppercase; letter-spacing: 1px; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
 
 .card { 
     background: rgba(25, 10, 35, 0.75); 
@@ -122,4 +120,82 @@ button:disabled { border-color: #777; color: #777; cursor: not-allowed; }
 
 .modal-btn:hover {
     background: #f1c40f; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); transform: scale(1.05);
+}
+
+/* --- CAROUSEL UI CSS --- */
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; 
+    max-width: 450px; /* Lebar 1 produk agar fokus */
+    margin: 0 auto 50px auto;
+}
+
+.carousel-container {
+    width: 100%;
+    overflow: hidden; 
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: rgba(25, 10, 35, 0.75);
+    border: 1px solid rgba(214, 175, 55, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    align-items: stretch;
+}
+
+/* Modifikasi Class Card Bawaan Anda */
+.card { 
+    min-width: 100%; /* Wajib 100% agar 1 card mengisi penuh container */
+    box-sizing: border-box;
+    background: transparent; 
+    border: none;
+    box-shadow: none;
+}
+
+/* Tombol Panah Slider */
+.carousel-btn {
+    background: rgba(212, 175, 55, 0.1) !important;
+    color: #d4af37 !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    font-size: 1.2em !important;
+    cursor: pointer;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease !important;
+    flex-shrink: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.carousel-btn:hover:not(:disabled) {
+    background: #d4af37 !important;
+    color: #1a0826 !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4) !important;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: transparent !important;
+}
+
+/* --- TWEAK RESPONSIVE MOBILE --- */
+@media (max-width: 480px) {
+    body { padding: 20px 10px; } /* Kurangi padding agar kartu tidak terlalu mepet */
+    
+    header h1 { font-size: 2em; } /* Kecilkan judul di layar HP */
+    
+    .card { padding: 20px; } /* Kurangi padding kartu agar konten lebih lega */
+    
+    .grid { gap: 20px; } /* Kurangi jarak antar kartu di HP */
 }

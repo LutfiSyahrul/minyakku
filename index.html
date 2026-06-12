@@ -13,11 +13,19 @@
     <header>
         <h1>PARFUMKU</h1>
         <p class="author">by Edwin Helmi Setiawan & Lutfi Syahrul Ramdani</p>
-        <p class="sub">Simulasi Sistem Terdistribusi Hibrida (REST API & SOAP Interoperability)</p>
+        <p class="sub">Simulasi Sistem Terdistribusi Hybrid (REST API & SOAP Interoperability)</p>
     </header>
 
-    <div class="grid" id="katalog-parfum">
-        <p style="text-align: center; width: 100%; color: #d4af37;">Membangunkan Server & Memuat Koleksi...</p>
+    <div class="carousel-wrapper">
+        <button class="carousel-btn prev-btn" onclick="prevSlide()" disabled>&#10094;</button>
+        
+        <div class="carousel-container">
+            <div class="carousel-track" id="katalog-parfum">
+                <p style="text-align: center; width: 100%; padding: 40px; color: #d4af37;">Membangunkan Server & Memuat Koleksi...</p>
+            </div>
+        </div>
+
+        <button class="carousel-btn next-btn" onclick="nextSlide()" disabled>&#10095;</button>
     </div>
 
     <div id="log-container">

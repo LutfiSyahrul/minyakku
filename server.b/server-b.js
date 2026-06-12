@@ -28,7 +28,7 @@ const paymentService = {
                     const connection = await mysql.createConnection(dbConfig);
                     const refSoap = 'SOAP-REF-' + Math.floor(Math.random() * 900000 + 100000);
                     
-                    // Query disesuaikan ke tabel transaksi_parfum
+                    // Query ke tabel transaksi_parfum
                     const query = `INSERT INTO transaksi 
                     (invoice_no, produk_id, jumlah_beli, total_bayar, status_pembayaran, nomor_rekening_pembeli, referensi_soap) 
                     VALUES (?, ?, ?, ?, 'SUCCESS', ?, ?)`;

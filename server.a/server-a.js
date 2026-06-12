@@ -55,7 +55,7 @@ app.get("/api/transaksi", async (req, res) => {
 app.post("/api/checkout", async (req, res) => {
     const { parfum_id, jumlah_beli, nomor_rekening_pembeli } = req.body;
 
-    // --- TAMBAHKAN VALIDASI INI ---
+    // VALIDASI INPUT SEDERHANA 
     if (!parfum_id || !jumlah_beli || !nomor_rekening_pembeli) {
         return res.status(400).json({
             success: false,
@@ -114,7 +114,7 @@ app.post("/api/checkout", async (req, res) => {
                 jumlahBeli: String(jumlah_beli),
             };
 
-            // Tembak RPC Legacy Bank
+            // Tembak Legacy Bank
             soapClient.prosesPembayaran(
                 soapArgs,
                 async function (err, soapResponse) {
